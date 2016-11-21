@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0" />
+    <style type="text/css">
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  </head>
+  <body id="map-container">
+    <div id="map"></div>
+	
+	<script>
+
+	
+// [START script-body]
+
+	
+	function initMap() {
+    // Creating a new map
+		var map = new google.maps.Map(document.getElementById("map"), {
+		  center: new google.maps.LatLng(40.11169, -99.49219),
+		  zoom: 5,
+		  mapTypeId: google.maps.MapTypeId.ROADMAP
+		});
+	
+	
+	 
+	var jsonData = new Array();
+ 
+	$(function(){
+		$.getJSON('myData.json',function(data){
+			jsonData = data.geo;
+			console.log('json loaded successfully');
+			
+	for (var i = 0, length = jsonData.length; i < length; i++) {
+		var data = jsonData[i];
+		latLng = new google.maps.LatLng(data.lat, data.lng); 
+		console.log(latLng);
+	  // Creating a marker and putting it on the map
+	  var marker = new google.maps.Marker({
+		position: latLng,
+		map: map,
+		icon: {
+			path: google.maps.SymbolPath.CIRCLE,
+			scale: 2,
+			fillColor: "#F00",
+			fillOpacity: 1,
+			strokeWeight: 0.4
+		}
+	  });
+	}
+	
+	}).error(function(){
+			console.log('error: json not loaded');
+		});
+	});
+	
+	
+	
+	
+	}
+
+    
+	
+
+// [END script-body]
+
+    </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0edcG5ekUWboLk8EXHx3ZEnK7phmf-lI&callback=initMap"></script>
+  </body>
+</html>
