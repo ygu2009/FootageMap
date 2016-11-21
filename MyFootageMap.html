@@ -41,18 +41,18 @@
 		var data = jsonData[i];
 		latLng = new google.maps.LatLng(data.lat, data.lng); 
 		console.log(latLng);
-	  // Creating a new marker and putting it on the map
-	  var marker = new google.maps.Marker({
-		position: latLng,
-		map: map,
-		icon: {
-			path: google.maps.SymbolPath.CIRCLE,
-			scale: 2,
-			fillColor: "#F00",
-			fillOpacity: 1,
-			strokeWeight: 0.4
-		}
-	  });
+		// Creating a new marker and putting it on the map
+		var marker = new google.maps.Marker({
+			position: latLng,
+			map: map,
+			icon: {
+				path: google.maps.SymbolPath.CIRCLE,
+				scale: 2,
+				fillColor: "#F00",
+				fillOpacity: 1,
+				strokeWeight: 0.4
+			}
+		 });
 	}
 	
 	}).error(function(){
