@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="initial-scale=1.0" />
     <style type="text/css">
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
       #map {
         height: 100%;
       }
@@ -31,8 +29,9 @@
 		  mapTypeId: google.maps.MapTypeId.ROADMAP
 		});
 	
+	// read the (latitue, longitude) from json file in your local directory
+	// and put it in to jsonData array
 	var jsonData = new Array();
- 
 	$(function(){
 		$.getJSON('myData.json',function(data){
 			jsonData = data.geo;
@@ -42,7 +41,7 @@
 		var data = jsonData[i];
 		latLng = new google.maps.LatLng(data.lat, data.lng); 
 		console.log(latLng);
-	  // Creating a marker and putting it on the map
+	  // Creating a new marker and putting it on the map
 	  var marker = new google.maps.Marker({
 		position: latLng,
 		map: map,
