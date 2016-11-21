@@ -1,5 +1,5 @@
 from PIL import Image
-from PIL.ExifTags import TAGS, GPSTAGS
+from PIL.ExifTags import TAGS
 import glob
 
 def DMS2Decimal(degree, min, sec, i):
@@ -45,10 +45,9 @@ def write2json(listGPS):
     print '\t]'
     print '}'
 
-
 if __name__=='__main__':
 
-    files = glob.glob("D://your_directory/*.jpg")
+    files = glob.glob("your_image_directory/*.jpg")
     imagesGPS={}
     n = 0
     # read GPS from image and record the GPS location in a array
