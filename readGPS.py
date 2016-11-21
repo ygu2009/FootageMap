@@ -65,7 +65,7 @@ if __name__=='__main__':
             imagesGPS[n] = [lat, lng]
             n=n+1
 
-    # combine the closed image
+    # combine the closed location
     imagesGPScc = {}
     lat_p, lng_p = 0,0
     n=0
