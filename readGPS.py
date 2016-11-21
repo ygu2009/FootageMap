@@ -23,18 +23,14 @@ def readGPS(img):
                 m=float(value[2][1][0])/float(value[2][1][1])
                 s=float(value[2][2][0])/float(value[2][2][1])
                 latitude=DMS2Decimal(d,m,s,i)
-                # print d, m, s, i, latitude
-
                 # calculate the longitude
                 i = value[3]
                 d=float(value[4][0][0])/float(value[4][0][1])
                 m=float(value[4][1][0])/float(value[4][1][1])
                 s=float(value[4][2][0])/float(value[4][2][1])
                 longitude=DMS2Decimal(d,m,s,i)
-                # print d, m, s, i, longitude
     else:
         pass
-
     return latitude, longitude
 
 def write2json(listGPS):
@@ -46,7 +42,6 @@ def write2json(listGPS):
         print '\t\t\"lat\":',gps[0],','
         print '\t\t\"lng\":',gps[1]
         print '\t},'
-
     print '\t]'
     print '}'
 
@@ -64,7 +59,6 @@ if __name__=='__main__':
         if lat!=0 and lng!=0:  # remove the no GPS info pictures
             imagesGPS[n] = [lat, lng]
             n=n+1
-
     # combine the closed location
     imagesGPScc = {}
     lat_p, lng_p = 0,0
