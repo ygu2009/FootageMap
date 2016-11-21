@@ -59,15 +59,5 @@ if __name__=='__main__':
         if lat!=0 and lng!=0:  # remove the no GPS info pictures
             imagesGPS[n] = [lat, lng]
             n=n+1
-    # combine the closed location
-    imagesGPScc = {}
-    lat_p, lng_p = 0,0
-    n=0
-    for item in imagesGPS.values():
-        if abs(item[0]-lat_p)>0.1 or abs(item[1]-lng_p)>0.1:
-            imagesGPScc[n] = [item[0], item[1]]
-            lat_p = item[0]
-            lng_p = item[1]
-            n=n+1
 
-    write2json(imagesGPScc)
+    write2json(imagesGPS)
