@@ -62,8 +62,7 @@ def write2json(listGPS):
 
 if __name__=='__main__':
 
-    files = glob.glob("C://Users/Yingying/PycharmProjects/FootageMap/test/*.jpg")
-    # files = glob.glob("D://entertainment/big/*.jpg")
+    files = glob.glob("Your_directory/*.jpg")
     imagesGPS={}
     n = 0
     # read GPS from image and record the GPS location in a array
