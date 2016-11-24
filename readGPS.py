@@ -23,31 +23,47 @@ def readGPS(img):
                 m=float(value[2][1][0])/float(value[2][1][1])
                 s=float(value[2][2][0])/float(value[2][2][1])
                 latitude=DMS2Decimal(d,m,s,i)
+                # print d, m, s, i, latitude
+
                 # calculate the longitude
                 i = value[3]
                 d=float(value[4][0][0])/float(value[4][0][1])
                 m=float(value[4][1][0])/float(value[4][1][1])
                 s=float(value[4][2][0])/float(value[4][2][1])
                 longitude=DMS2Decimal(d,m,s,i)
+                # print d, m, s, i, longitude
     else:
         pass
+
     return latitude, longitude
 
 def write2json(listGPS):
-    print '{'
-    print '\t\"geo\":['
-    coord=listGPS.values()
-    for gps in coord:
-        print '\t{'
-        print '\t\t\"lat\":',gps[0],','
-        print '\t\t\"lng\":',gps[1]
-        print '\t},'
-    print '\t]'
-    print '}'
+    w2file = open("./myData.json", "w")
+
+    w2file.write('{\n')
+    w2file.write('\t\"geo\":[\n')
+    for ii in range(listGPS.__len__()-1):
+        w2file.write('\t{\n')
+        w2file.write('\t\t\"lat\": %f,\n' % listGPS[ii][0])
+        w2file.write('\t\t\"lng\": %f\n' % listGPS[ii][1])
+        w2file.write('\t},')
+
+    # for the last location
+    w2file.write('\t{\n')
+    w2file.write('\t\t\"lat\": %f,\n' % listGPS[listGPS.__len__()-1][0])
+    w2file.write('\t\t\"lng\": %f\n' % listGPS[listGPS.__len__()-1][1])
+    w2file.write('\t}\n')
+
+    w2file.write('\t]\n')
+    w2file.write('}\n')
+
+    w2file.close()
+
 
 if __name__=='__main__':
 
-    files = glob.glob("your_image_directory/*.jpg")
+    files = glob.glob("C://Users/Yingying/PycharmProjects/FootageMap/test/*.jpg")
+    # files = glob.glob("D://entertainment/big/*.jpg")
     imagesGPS={}
     n = 0
     # read GPS from image and record the GPS location in a array
@@ -59,4 +75,11 @@ if __name__=='__main__':
             imagesGPS[n] = [lat, lng]
             n=n+1
 
-    write2json(imagesGPS)
+    # combine the closed image
+    imagesGPScc = []
+    lat_p, lng_p = 0,0
+    for item in imagesGPS.values():
+        if abs(item[0]-lat_p)>0.01 or abs(item[1]-lng_p)>0.01:
+            imagesGPScc.append([item[0], item[1]])
+
+    write2json(imagesGPScc)
